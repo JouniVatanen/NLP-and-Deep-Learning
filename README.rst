@@ -12,7 +12,14 @@ Natural language processing and deep learning course from Udemy. See more info i
 For further information on how to use the scripts of this project,
 got the documentation shown above.
 
-
+# TODO
+- [project skeleton](https://github.com/conda/cookiecutter-conda-python)
+- [more about cookiecutter](https://stackoverflow.com/questions/49474575/how-to-install-my-own-python-module-package-via-conda-and-watch-its-changes)
+- [more about project skeleton](https://dev.to/codemouse92/dead-simple-python-project-structure-and-imports-38c6)
+- [git to pick only one folder e.g. sparsecheckout](https://stackoverflow.com/questions/2425059/how-to-pull-specific-directory-with-git) or [filter](https://stackoverflow.com/questions/2425059/how-to-pull-specific-directory-with-git)
+- [git to upload to specific location]()
+- [maybe setup.py](https://stackoverflow.com/questions/1471994/what-is-setup-py)
+- 
 
 
 
