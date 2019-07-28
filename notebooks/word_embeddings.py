@@ -14,10 +14,12 @@ from multiprocessing.pool import ThreadPool
 sys.path.append("./src/")
 import download_files
 
-#%% DOWNLOAD WIKIPEDIA DUMP FILES
-# Add a path to download files from url script
+# Paths
+processed_data_path = os.path.normpath("./data/processed")
 raw_data_path = os.path.normpath("./data/raw")
 
+#%% DOWNLOAD WIKIPEDIA DUMP FILES
+# Add a path to download files from url script
 def download_url_wrapper(url):
 	return download_files.download_url(url, path = raw_data_path)
 
@@ -37,23 +39,22 @@ urls = [url + x for x in files]
 results = ThreadPool(5).imap_unordered(download_url_wrapper, urls)
 print(results)
 
-#%% MODIFY WIKIPEDIA DUMP FILES
+#%%
+# Create a single file
 wikipedia_files = [os.path.join(raw_data_path, f) for f in os.listdir(raw_data_path) if f.startswith("enwiki")]
-processed_data_path = os.path.normpath("./data/processed")
+wikipedia_file = os.path.join(raw_data_path, "enwiki-20190701-pages-articles.xml.bz2")
 
-# Loop all wikipedia dump files
-for f in wikipedia_files:
-	# Check loop situation
-	print("Processing file: " + f)
-	subprocess.call(["python", "./src/WikiExtractor.py", "-o", processed_data_path, f])
-	# Create a single file and remove extracted files
-	output_file = os.path.splitext(f)[0] + ".txt"
-	print("Create single file: " + output_file)
-	subprocess.call(["find", processed_data_path, "-name", "'*bz2'", "-exec", "bzip2", "-c", "{}", "\;", ">", output_file])
-	subprocess.call(["rm", "-rf", processed_data_path + "/*/"]) 
+buffer_size = 8  # Adjust this according to how "memory efficient" you need the program to be.
 
-#%%
-subprocess.call(["rm", "-rf", os.path.join(processed_data_path, "/*/")]) 
+with open(wikipedia_file, 'wb') as dest_file:
+    for file_name in wikipedia_files:
+        with open(file_name, 'rb') as source_file:
+            chunk = True
+            while chunk:
+                chunk = source_file.read(buffer_size)
+                dest_file.write(chunk)
 
+#%% MODIFY WIKIPEDIA DUMP FILES
+subprocess.call(["python", "./src/wiki_extractor/WikiExtractor.py", "-o", processed_data_path, wikipedia_file])
 
-#%%
+#%% 
