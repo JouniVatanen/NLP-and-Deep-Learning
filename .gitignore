@@ -76,6 +76,10 @@ target/
 # Extra requirements
 requirements_pre.txt
 
+# VSCode
+.vscode/
+*.code.workspace
+
 ##### Including files #####
 !.rtd-environment.yml
 !.gitignore

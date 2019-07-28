@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\vatanjj\\Documents\\Programs\\miniconda\\envs\\ds_py37\\python.exe",
+    "python.pythonPath": "C:\\Users\\vatanjj\\Tools\\miniconda\\envs\\ds_py37\\python.exe",
     "restructuredtext.confPath": "${workspaceFolder}\\docs"
 }
