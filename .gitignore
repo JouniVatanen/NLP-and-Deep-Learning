@@ -41,7 +41,7 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
-*,cover
+*.cover
 
 # Translations
 *.mo
@@ -78,7 +78,10 @@ requirements_pre.txt
 
 # VSCode
 .vscode/
-*.code.workspace
+*.code-workspace
+
+# Github
+.github/
 
 ##### Including files #####
 !.rtd-environment.yml
